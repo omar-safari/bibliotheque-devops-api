@@ -1,0 +1,25 @@
+services:
+  api:
+    build: .
+    container_name: bibliotheque-api
+    ports:
+      - "3000:3000"
+    environment:
+      DB_USER: omar
+      DB_PASSWORD: omar123
+      DB_NAME: bibliotheque
+      DB_HOST: db
+      DB_PORT: 5432
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16
+    container_name: bibliotheque-db
+    restart: always
+    environment:
+      POSTGRES_USER: omar
+      POSTGRES_PASSWORD: omar123
+      POSTGRES_DB: bibliotheque
+    ports:
+      - "5432:5432"
